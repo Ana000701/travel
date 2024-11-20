@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.css"
+      integrity="sha512-o4fdUmGibiKwrKJsHd5OsYEDAg2DjAYTHVO+j4W2h1FI72ucVnuXNy8o5g7moSnM3LyfJrZzCBNUENYn2U1SAg=="
+      crossorigin="anonymous"
+    />
+    <title>Travel</title>
+    <script type="module" crossorigin src="/travel/assets/index-2fb8d052.js"></script>
+    <link rel="stylesheet" href="/travel/assets/index-3c11a81c.css">
+  </head>
+  <body>
+    <main>
+      <section
+        class="flex gap-[30px] w-[920px] px-[95px] py-[60px] mx-auto mt-[120px] mb-[100px] rounded-[12px] shadow-[0px_3px_6px_rgba(0,0,0,0.3)]"
+      >
+        <div class="flex flex-col w-[350px]">
+          <img
+            src="https://github.com/hexschool/2022-web-layout-training/blob/main/js_week5/main_img.png?raw=true"
+            alt="main"
+            class="mb-5"
+          />
+          <img
+            src="https://github.com/hexschool/2022-web-layout-training/blob/main/js_week5/logo.png?raw=true"
+            alt="logo"
+          />
+        </div>
+        <div class="w-[350px]">
+          <h1
+            class="text-2xl leading-snug text-primary font-bold pb-1 mb-8 border-b-[3px] border-b-primary"
+          >
+            新增旅遊套票
+          </h1>
+          <form class="flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+              <label for="name">套票名稱</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="請填寫套票名稱"
+                required
+              />
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="imgUrl">圖片網址</label>
+              <input
+                type="text"
+                id="imgUrl"
+                placeholder="請填寫圖片網址"
+                required
+              />
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="area">景點地區</label>
+              <select name="area" id="area" required>
+                <option value="">請選擇景點地區</option>
+                <option value="台北">台北</option>
+                <option value="台中">台中</option>
+                <option value="高雄">高雄</option>
+              </select>
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="price">套票金額</label>
+              <input
+                type="number"
+                id="price"
+                placeholder="請填寫套票金額"
+                required
+              />
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="group">套票組數</label>
+              <input
+                type="number"
+                id="group"
+                placeholder="請填寫套票組數"
+                required
+              />
+            </div>
+            <div class="flex items-center justify-between mb-4">
+              <label for="rate">套票星級</label>
+              <input
+                type="number"
+                id="rate"
+                min="1"
+                max="10"
+                placeholder="請填寫套票星級"
+                required
+              />
+            </div>
+            <div class="flex items-start justify-between mb-6">
+              <label for="description">套票描述</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="4"
+                placeholder="請填寫套票描述（限 100 字）"
+                required
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              id="submit"
+              class="text-xl leading-snug text-[white] px-10 py-2.5 ml-auto bg-primary w-[160px] rounded-[4.8px]"
+            >
+              新增套票
+            </button>
+          </form>
+        </div>
+      </section>
+      <section class="bg-gray3 pt-[56px] pb-[119px]">
+        <div class="w-[920px] flex items-center gap-[30px] mx-auto mb-[52px]">
+          <select
+            name="filter"
+            id="filter"
+            class="w-[255px] px-3 py-2 rounded-sm bg-white border-[1px] border-gray6 text-gray1"
+          >
+            <option value="" class="text-gray1 leading-snug">地區搜尋</option>
+            <option value="all">全部地區</option>
+            <option value="台北">台北</option>
+            <option value="台中">台中</option>
+            <option value="高雄">高雄</option>
+          </select>
+          <p class="filter-result text-gray1 leading-snug">
+            本次搜尋共 6 筆資料
+          </p>
+        </div>
+
+        <ul
+          class="card-list flex flex-wrap gap-x-[30px] gap-y-[38px] w-[1110px] mx-auto"
+        ></ul>
+      </section>
+    </main>
+
+    
+  </body>
+</html>
