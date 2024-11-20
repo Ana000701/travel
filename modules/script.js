@@ -223,3 +223,14 @@ submitBtn.addEventListener("click", (e) => {
   filter.value = "";
   filterResult.innerHTML = `本次搜尋共 ${items.length} 筆資料`;
 });
+
+axios
+  .get(
+    "https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json"
+  )
+  .then((res) => {
+    res.data.data.forEach((item) => items.push(item));
+    console.log(items);
+    list.innerHTML = "";
+    renderList(items);
+  });
