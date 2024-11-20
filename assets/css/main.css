@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  label {
+    @apply text-base leading-snug text-primary font-medium;
+  }
+  input,
+  select,
+  textarea {
+    @apply bg-gray0 px-3 py-2 w-[255px] border-b-[1px] border-primary text-gray4 placeholder:text-base placeholder:leading-snug placeholder:text-gray1  focus:outline-none;
+  }
+
+  option {
+    @apply text-gray4;
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-[350px] rounded-sm border-[1px] border-gray5 shadow-[0px_3px_6px_rgba(0,0,0,0.3)] leading-snug text-primary relative;
+  }
+  .card-area {
+    @apply rounded-r-sm absolute top-[-12px] left-0 px-5 py-2 text-xl leading-6 text-white bg-secondary;
+  }
+  .card-rate {
+    @apply rounded-r-sm absolute top-[164px] left-0 px-2 py-[5px] text-white bg-primary;
+  }
+  .card-title {
+    @apply text-2xl  font-medium pb-1 mb-4 border-b-2;
+  }
+  .card-description {
+    @apply text-base text-gray1 mb-[22px];
+  }
+  .card-price {
+    @apply text-[32px];
+  }
+}
