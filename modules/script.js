@@ -109,12 +109,17 @@ const items = [
 ];
 // 初始化表單
 const list = document.querySelector(".card-list");
+const filter = document.querySelector("#filter");
+const filterResult = document.querySelector(".filter-result");
+
 function renderList(arr) {
   arr.forEach((item, index) => {
     const card = `<li class="card flex flex-col">
             <div class="card-area">${item.area}</div>
             <div class="card-rate">${item.rate}</div>
-            <img src="${item.imgUrl}" alt="image" class="rounded-sm" />
+            <img src="${
+              item.imgUrl
+            }" alt="image" class="rounded-sm h-[180px] object-cover" />
             <div class="flex flex-col h-full px-5 pt-5 pb-3.5">
               <h2 class="card-title">${item.name}</h2>
               <p class="card-description">${item.description}</p>
@@ -132,13 +137,11 @@ function renderList(arr) {
           </li>`;
     list.innerHTML += card;
   });
+  filterResult.innerHTML = `本次搜尋共 ${items.length} 筆資料`;
 }
 renderList(items);
 
 // 篩選功能
-const filter = document.querySelector("#filter");
-const filterResult = document.querySelector(".filter-result");
-
 function filterItem(e) {
   if (e.target.value === "all") {
     list.innerHTML = "";
