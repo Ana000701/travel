@@ -177,7 +177,7 @@ const group = document.querySelector("#group");
 const rate = document.querySelector("#rate");
 const description = document.querySelector("#description");
 const p = document.querySelectorAll("form p");
-console.log(p);
+
 // 驗證輸入符合條件
 rate.addEventListener("change", (e) => {
   if (e.target.value > 10 || e.target.value < 0) {
