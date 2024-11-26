@@ -137,7 +137,7 @@ function renderList(arr) {
           </li>`;
     list.innerHTML += card;
   });
-  filterResult.innerHTML = `本次搜尋共 ${items.length} 筆資料`;
+  filterResult.textContent = `本次搜尋共 ${items.length} 筆資料`;
 }
 renderList(items);
 
@@ -146,25 +146,24 @@ function filterItem(e) {
   if (e.target.value === "all") {
     list.innerHTML = "";
     renderList(items);
-    filterResult.innerHTML = `本次搜尋共 ${items.length} 筆資料`;
   }
   if (e.target.value === "台北") {
     list.innerHTML = "";
     const result = items.filter((item) => item.area === "台北");
     renderList(result);
-    filterResult.innerHTML = `本次搜尋共 ${result.length} 筆資料`;
+    filterResult.textContent = `本次搜尋共 ${result.length} 筆資料`;
   }
   if (e.target.value === "台中") {
     list.innerHTML = "";
     const result = items.filter((item) => item.area === "台中");
     renderList(result);
-    filterResult.innerHTML = `本次搜尋共 ${result.length} 筆資料`;
+    filterResult.textContent = `本次搜尋共 ${result.length} 筆資料`;
   }
   if (e.target.value === "高雄") {
     list.innerHTML = "";
     const result = items.filter((item) => item.area === "高雄");
     renderList(result);
-    filterResult.innerHTML = `本次搜尋共 ${result.length} 筆資料`;
+    filterResult.textContent = `本次搜尋共 ${result.length} 筆資料`;
   }
 }
 filter.addEventListener("change", filterItem);
@@ -177,7 +176,8 @@ const price = document.querySelector("#price");
 const group = document.querySelector("#group");
 const rate = document.querySelector("#rate");
 const description = document.querySelector("#description");
-
+const p = document.querySelectorAll("form p");
+console.log(p);
 // 驗證輸入符合條件
 rate.addEventListener("change", (e) => {
   if (e.target.value > 10 || e.target.value < 0) {
@@ -189,13 +189,15 @@ rate.addEventListener("change", (e) => {
 function changeColor(item) {
   if (item.value === "") {
     item.classList.add("bg-red1", "border-red2", "placeholder:text-red2");
+    p.forEach((item) => item.classList.remove("hidden"));
   } else {
     item.classList.remove("bg-red1", "border-red2", "placeholder:text-red2");
+    p.forEach((item) => item.classList.add("hidden"));
   }
 }
 // 新增項目
 const submitBtn = document.querySelector("#submit");
-
+const initialDonutChart = document.querySelector("#donutChart");
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   changeColor(name);
@@ -221,19 +223,61 @@ submitBtn.addEventListener("click", (e) => {
   }
   items.push(newItem);
   list.innerHTML = "";
-  console.log(items);
+  initialDonutChart.innerHTML = "";
   renderList(items);
+  donutChart();
   filter.value = "";
-  filterResult.innerHTML = `本次搜尋共 ${items.length} 筆資料`;
 });
 
-axios
-  .get(
-    "https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json"
-  )
-  .then((res) => {
-    res.data.data.forEach((item) => items.push(item));
-    console.log(items);
-    list.innerHTML = "";
-    renderList(items);
+// axios取資料
+async function getData() {
+  try {
+    const response = await axios
+      .get(
+        "https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json"
+      )
+      .then((res) => {
+        res.data.data.forEach((item) => items.push(item));
+        list.innerHTML = "";
+        renderList(items);
+        donutChart();
+      });
+  } catch (error) {
+    console.error(error);
+  }
+}
+getData();
+
+// 畫圖
+function donutChart() {
+  let data1 = items.filter((item) => item.area === "台北").length;
+  let data2 = items.filter((item) => item.area === "台中").length;
+  let data3 = items.filter((item) => item.area === "高雄").length;
+  let donutChart = c3.generate({
+    bindto: "#donutChart",
+    size: {
+      height: 200,
+      width: 200,
+    },
+    data: {
+      columns: [
+        ["台北", data1],
+        ["台中", data2],
+        ["高雄", data3],
+      ],
+      type: "donut",
+      colors: {
+        台北: "#26C0C7",
+        台中: "#5151D3",
+        高雄: "#E68618",
+      },
+    },
+    donut: {
+      title: "套票地區比重",
+      label: {
+        show: false,
+      },
+      width: 10,
+    },
   });
+}
